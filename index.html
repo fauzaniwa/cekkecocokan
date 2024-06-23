@@ -89,6 +89,7 @@
 <div class="credit">
     <p>Created by <a href="https://instagram.com/fauzanaztera_" target="_blank">IWa</a></p>
 </div>
+
 <script>
     function sendWhatsAppMessage() {
         var yourName = document.getElementById('yourName').value.trim();
@@ -114,7 +115,7 @@
     }
 
     function sendWhatsApp(message) {
-        var url = 'https://api.twilio.com/2010-04-01/Accounts/AC1c400196e44c1a3e56020f9c62a40741/Messages.json';
+        var url = 'https://api.twilio.com/2010-04-01/Accounts/' + secrets.TWILIO_ACCOUNT_SID + '/Messages.json';
         var params = new URLSearchParams();
         params.append('To', 'whatsapp:+6282385541846'); // Ganti dengan nomor WhatsApp tujuan
         params.append('From', 'whatsapp:+14155238886'); // Nomor WhatsApp sandbox Twilio
@@ -122,8 +123,8 @@
 
         axios.post(url, params, {
             auth: {
-                username: 'AC1c400196e44c1a3e56020f9c62a40741',
-                password: 'de7dde603cc1c0809423e7d47e822a11'
+                username: secrets.TWILIO_ACCOUNT_SID,
+                password: secrets.TWILIO_AUTH_TOKEN
             },
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
@@ -136,6 +137,7 @@
             console.error('Gagal mengirim pesan WhatsApp:', error);
         });
     }
+
 
     function calculateCompatibility() {
         return Math.floor(Math.random() * 100) + 1;
@@ -167,10 +169,6 @@
         document.getElementById('resultForm').style.display = 'none';
     }
 </script>
-
-
-
-
 
 </body>
 </html>
